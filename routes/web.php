@@ -16,7 +16,7 @@ use App\Http\Controllers\ProdukController;
 |
 */
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::group(['prefix'=>'rancangan'],function(){
     Route::get('/', [RancanganController::class, 'index'])->name('rancangan');

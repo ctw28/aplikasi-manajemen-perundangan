@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<h1>Selamat Datang di Aplikasi SIPEUMDA</h1>
+<h1>Selamat Datang di Aplikasi SIPEUMDA <br>Biro Hukum Provinsi Sulawesi Tenggara</h1>
 <div class="top_tiles">
     <div class="animated flipInY col-lg-6 col-md-6 col-sm-6 ">
         <div class="tile-stats">

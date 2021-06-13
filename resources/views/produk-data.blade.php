@@ -10,9 +10,9 @@
 
 @section('content')
 <h1>Daftar Produk Hukum</h1>
-<a href="{{route('produk.create')}}" class="btn btn-warning">Tambah Produk Hukum</a>
+<a href="{{route('produk.create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> &nbsp Tambah Produk Hukum</a>
 @if(session('message')) {!!session('message')!!} @endif
-<table id="datatable" class="table table-striped table-bordered" style="width:100%">
+<table id="datatable" class="table table-striped table-bordered jambo_table" style="width:100%">
     <thead>
         <tr>
             <th>No</th>

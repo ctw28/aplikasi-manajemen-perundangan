@@ -15,7 +15,7 @@
         <div class="tile-stats">
             <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
             <div class="count">{{$data['totalRancangan']}}</div>
-            <h3>Total Rancangan</h3>
+            <h3>Total Rancangan Produk Hukum</h3>
         </div>
     </div>
     <div class="animated flipInY col-lg-6 col-md-6 col-sm-6 ">
@@ -26,10 +26,10 @@
         </div>
     </div>
 </div>
-<div class="col-md-6 col-sm-6  ">
+<div class="col-md-4 col-sm-4">
     <div class="x_panel">
         <div class="x_title" style="text-align:center !important">
-            <h2>Grafik Rancangan</h2>
+            <h2>Grafik Rancangan Produk Hukum</h2>
 
             <div class="clearfix"></div>
         </div>
@@ -38,7 +38,7 @@
         </div>
     </div>
 </div>
-<div class="col-md-6 col-sm-6  ">
+<div class="col-md-4 col-sm-4">
     <div class="x_panel">
         <div class="x_title" style="text-align:center !important">
             <h2>Grafik Produk Hukum</h2>

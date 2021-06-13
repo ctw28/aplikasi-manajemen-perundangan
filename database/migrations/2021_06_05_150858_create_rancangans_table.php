@@ -23,7 +23,7 @@ class CreateRancangansTable extends Migration
             $table->string('perihal');
             $table->string('keterangan');
             $table->enum('status', ['proses', 'selesai']);
-            $table->string('file_rancangan');
+            $table->string('file_rancangan')->nullable();
             $table->timestamps();
 
             $table->foreign('kabupaten_id')->references('id')->on('kabupatens');

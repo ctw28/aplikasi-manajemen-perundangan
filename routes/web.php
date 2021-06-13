@@ -18,7 +18,7 @@ use App\Http\Controllers\ProdukController;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::group(['prefix'=>'rancangan'],function(){
+Route::group(['prefix'=>'rancangan-produk-hukum'],function(){
     Route::get('/', [RancanganController::class, 'index'])->name('rancangan');
     Route::get('/tambah-data', [RancanganController::class, 'create'])->name('rancangan.create');
     Route::post('/simpan', [RancanganController::class, 'store'])->name('rancangan.store');
@@ -27,7 +27,7 @@ Route::group(['prefix'=>'rancangan'],function(){
     Route::get('/{id}/hapus',[RancanganController::class, 'destroy'])->name('rancangan.destroy');
 });
 
-Route::group(['prefix'=>'produk'],function(){
+Route::group(['prefix'=>'produk-hukum'],function(){
     Route::get('/', [ProdukController::class, 'index'])->name('produk');
     Route::get('/tambah-data', [ProdukController::class, 'create'])->name('produk.create');
     Route::post('/simpan', [ProdukController::class, 'store'])->name('produk.store');

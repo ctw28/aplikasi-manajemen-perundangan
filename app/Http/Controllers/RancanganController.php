@@ -68,20 +68,21 @@ class RancanganController extends Controller
 			'perihal' => 'required',
 			'keterangan' => 'required',
 			'status' => 'required',
-			'file_rancangan' => 'required|file|mimes:pdf|max:2048'
+			'file_rancangan' => 'file|mimes:pdf|max:2048'
 		]);
+        $data = $request->all();        
+        if(!empty($file)){
+            // menyimpan data file yang diupload ke variabel $file
+            $file = $request->file('file_rancangan');
 
-		// menyimpan data file yang diupload ke variabel $file
-		$file = $request->file('file_rancangan');
+            $nama_file = time()."_".$file->getClientOriginalName();
 
-		$nama_file = time()."_".$file->getClientOriginalName();
-
-        // isi dengan nama folder tempat kemana file diupload
-		$tujuan_upload = 'file-upload';
-        $request->file_rancangan = $nama_file;
-		$file->move($tujuan_upload,$nama_file);
-        $data = $request->all();
-        $data['file_rancangan'] = $nama_file;
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'file-upload';
+            $request->file_rancangan = $nama_file;
+            $file->move($tujuan_upload,$nama_file);
+            $data['file_rancangan'] = $nama_file;
+        }
         Rancangan::create($data);
         return redirect()->route('rancangan')->with('message', \GeneralHelper::formatMessage('Berhasil menambahkan data !', 'success'));
 

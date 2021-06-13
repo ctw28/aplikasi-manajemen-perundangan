@@ -10,11 +10,12 @@
 
 @section('content')
 <h1>Daftar Rancangan</h1>
-<a href="{{route('rancangan.create')}}" class="btn btn-warning">Tambah Rancangan</a>
+<a href="{{route('rancangan.create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> &nbsp Tambah
+    Rancangan</a>
 @if(session('message')) {!!session('message')!!} @endif
-<table id="datatable" class="table table-striped table-bordered" style="width:100%">
+<table id="datatable" class="table table-striped table-bordered jambo_table" style="width:100%">
     <thead>
-        <tr>
+        <tr style="text-align:center">
             <th>No</th>
             <th>No. Registasi</th>
             <th>Tanggal Input</th>
@@ -22,8 +23,9 @@
             <th>Kabupaten</th>
             <th>No. Surat</th>
             <th>Perihal</th>
-            <th>Status</th>
             <th>Keterangan</th>
+            <th>Status</th>
+            <th>File</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -39,6 +41,7 @@
             <td>{{$item->kabupaten_id->kabupaten_nama}}</td>
             <td>{{$item->no_surat}}</td>
             <td>{{$item->perihal}}</td>
+            <td>{{$item->keterangan}}</td>
             <td>
                 <h6>
                     <span class="badge {{($item->status=='selesai')?'badge-success':'badge-info'}}">
@@ -46,13 +49,18 @@
                     </span>
                 </h6>
             </td>
-            <td>{{$item->keterangan}}</td>
-            <td>
-                <a href="http://127.0.0.1:8000/file-upload/{{$item->file_rancangan}}" target="_blank"
-                    class="btn btn-primary btn-xs">
-                    <i class="fa fa-eye"></i>
+            <td style="text-align:center">
+                @if (empty($item->file_rancangan))
+                -
+                @else
+                <a href="http://127.0.0.1:8000/file-upload/{{$item->file_rancangan}}" target="_blank">
+                    Lihat File
                 </a>
-                <a href="{{route('rancangan.destroy',['id' => $item->id])}}" class="btn btn-danger btn-xs">
+                @endif
+            </td>
+            <td>
+                <a onclick="return confirm('Yakin hapus data?')" href="
+                    {{route('rancangan.destroy',['id' => $item->id])}}" class="btn btn-danger btn-xs">
                     <i class="fa fa-trash-o"></i>
                 </a>
                 <a href="{{route('rancangan.edit',['id' => $item->id])}}" class="btn btn-warning btn-xs">

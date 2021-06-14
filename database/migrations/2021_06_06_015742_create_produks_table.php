@@ -16,8 +16,7 @@ class CreateProduksTable extends Migration
         Schema::create('produks', function (Blueprint $table) {
             $table->id();
             $table->string('no_perda');
-            $table->date('tgl_input');
-            $table->date('tgl_produk');
+            $table->string('judul_peraturan');
             $table->string('tahun');
             $table->unsignedBigInteger('kabupaten_id');
             $table->string('jenis_produk');

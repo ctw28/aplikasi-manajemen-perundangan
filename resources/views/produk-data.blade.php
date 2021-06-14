@@ -17,12 +17,12 @@
         <tr>
             <th>No</th>
             <th>No. Perda</th>
-            <th>Tanggal Input</th>
-            <th>Tanggal Produk</th>
+            <th>Judul Peraturan</th>
             <th>Tahun</th>
             <th>Kabupaten</th>
             <th>Jenis Produk</th>
             <th>Status</th>
+            <th>File</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -33,18 +33,25 @@
         <tr>
             <td>1</td>
             <td>{{$item->no_perda}}</td>
-            <td>{{$item->tgl_input}}</td>
-            <td>{{$item->tgl_produk}}</td>
+            <td>{{$item->judul_peraturan}}</td>
             <td>{{$item->tahun}}</td>
             <td>{{$item->kabupaten_id->kabupaten_nama}}</td>
             <td>{{$item->jenis_produk}}</td>
-            <td>{{$item->status}}</td>
             <td>
-                <a href="http://127.0.0.1:8000/file-upload/{{$item->file_produk}}" target="_blank"
-                    class="btn btn-primary btn-xs">
-                    <i class="fa fa-eye"></i>
+                <h6>
+                    <span class="badge {{($item->status=='berlaku')?'badge-success':'badge-danger'}}">
+                        {{$item->status}}
+                    </span>
+                </h6>
+            </td>
+            <td>
+                <a href="http://127.0.0.1:8000/file-upload/{{$item->file_produk}}" target="_blank">
+                    Lihat File
                 </a>
-                <a href="{{route('produk.destroy',['id' => $item->id])}}" class="btn btn-danger btn-xs">
+            </td>
+            <td>
+                <a onclick="return confirm('Yakin hapus data?')" href="{{route('produk.destroy',['id' => $item->id])}}"
+                    class="btn btn-danger btn-xs">
                     <i class="fa fa-trash-o"></i>
                 </a>
             </td>

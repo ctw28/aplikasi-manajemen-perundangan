@@ -11,8 +11,7 @@ class Produk extends Model
     protected $table = 'produks';
     protected $fillable = [
         'no_perda',
-        'tgl_input',
-        'tgl_produk',
+        'judul_peraturan',
         'tahun',
         'kabupaten_id',
         'jenis_produk',

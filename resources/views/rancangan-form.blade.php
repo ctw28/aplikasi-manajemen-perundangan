@@ -35,21 +35,21 @@
         </div>
     </div>
     <div class="item form-group">
-        <label class="col-form-label col-md-2 col-sm-2 label-align" for="tgl_input">Tanggal
-            Input <span class="required">*</span>
+        <label class="col-form-label col-md-2 col-sm-2 label-align" for="tgl_penerimaan">Tanggal
+            Penerimaan <span class="required">*</span>
         </label>
         <div class="col-md-10 col-sm-10 ">
-            <input type="date" name="tgl_input" id="tgl_input" required="required" class="form-control "
-                value="{{$data['dataRancangan']->tgl_input}}">
+            <input type="date" name="tgl_penerimaan" id="tgl_penerimaan" required="required" class="form-control "
+                value="{{$data['dataRancangan']->tgl_penerimaan}}">
         </div>
     </div>
     <div class="item form-group">
         <label class="col-form-label col-md-2 col-sm-2 label-align" for="tgl_rancangan">Tanggal
-            Rancangan <span class="required">*</span>
+            Surat <span class="required">*</span>
         </label>
         <div class="col-md-10 col-sm-10 ">
-            <input type="date" name="tgl_rancangan" id="tgl_rancangan" required="required" class="form-control "
-                value="{{$data['dataRancangan']->tgl_rancangan}}">
+            <input type="date" name="tgl_surat" id="tgl_surat" required="required" class="form-control "
+                value="{{$data['dataRancangan']->tgl_surat}}">
         </div>
     </div>
     <div class="item form-group">

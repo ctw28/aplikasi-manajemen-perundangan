@@ -34,8 +34,8 @@ class RancanganController extends Controller
         // $data = Kabupaten::all();
         $value = (object) array(
             'no_registrasi'=>"",
-            'tgl_input'=>"",
-            'tgl_rancangan'=>"",
+            'tgl_penerimaan'=>"",
+            'tgl_surat'=>"",
             'no_surat'=>"",
             'kabupaten_id'=>"",
             'perihal'=>"",
@@ -61,8 +61,8 @@ class RancanganController extends Controller
     {
         $this->validate($request, [
 			'no_registrasi' => 'required',
-			'tgl_input' => 'required',
-			'tgl_rancangan' => 'required',
+			'tgl_penerimaan' => 'required',
+			'tgl_surat' => 'required',
 			'no_surat' => 'required',
 			'kabupaten_id' => 'required',
 			'perihal' => 'required',
@@ -130,8 +130,8 @@ class RancanganController extends Controller
         //
         $this->validate($request, [
 			'no_registrasi' => 'required',
-			'tgl_input' => 'required',
-			'tgl_rancangan' => 'required',
+			'tgl_penerimaan' => 'required',
+			'tgl_surat' => 'required',
 			'no_surat' => 'required',
 			'kabupaten_id' => 'required',
 			'perihal' => 'required',

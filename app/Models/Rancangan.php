@@ -11,8 +11,8 @@ class Rancangan extends Model
     protected $table = 'rancangans';
     protected $fillable = [
         'no_registrasi',
-        'tgl_input',
-        'tgl_rancangan',
+        'tgl_penerimaan',
+        'tgl_surat',
         'no_surat',
         'kabupaten_id',
         'perihal',

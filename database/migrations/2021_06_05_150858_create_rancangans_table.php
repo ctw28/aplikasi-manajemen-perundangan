@@ -16,8 +16,8 @@ class CreateRancangansTable extends Migration
         Schema::create('rancangans', function (Blueprint $table) {
             $table->id();
             $table->string('no_registrasi');
-            $table->date('tgl_input');
-            $table->date('tgl_rancangan');
+            $table->date('tgl_penerimaan');
+            $table->date('tgl_surat');
             $table->string('no_surat');
             $table->unsignedBigInteger('kabupaten_id');
             $table->string('perihal');

@@ -44,6 +44,12 @@ class ProdukController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'no_perda'=>'required',
+            'judul_peraturan'=>'required',
+            'tahun'=>'required',
+            'kabupaten_id'=>'required',
+            'jenis_produk'=>'required',
+            'status'=>'required',
 			'file_produk' => 'required|file|mimes:pdf|max:2048'
 		]);
 

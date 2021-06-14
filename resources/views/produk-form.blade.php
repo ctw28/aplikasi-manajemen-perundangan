@@ -30,19 +30,11 @@
         </div>
     </div>
     <div class="item form-group">
-        <label class="col-form-label col-md-2 col-sm-2 label-align" for="tgl_input">Tanggal
-            Input <span class="required">*</span>
+        <label class="col-form-label col-md-2 col-sm-2 label-align" for="judul_peraturan">Judul Peraturan <span
+                class="required">*</span>
         </label>
         <div class="col-md-10 col-sm-10 ">
-            <input type="date" name="tgl_input" id="tgl_input" required="required" class="form-control ">
-        </div>
-    </div>
-    <div class="item form-group">
-        <label class="col-form-label col-md-2 col-sm-2 label-align" for="tgl_produk">Tanggal
-            Produk <span class="required">*</span>
-        </label>
-        <div class="col-md-10 col-sm-10 ">
-            <input type="date" name="tgl_produk" id="tgl_produk" required="required" class="form-control ">
+            <input type="text" name="judul_peraturan" id="judul_peraturan" required="required" class="form-control ">
         </div>
     </div>
     <div class="item form-group">

@@ -8,6 +8,11 @@ use App\Models\Kabupaten;
 
 class ProdukController extends Controller
 {
+
+    private $jenisProduk = array(
+        'Peraturan Daerah' => 'daerah',
+        'Peraturan Gubernur / Walikota' => 'gubernur'
+    );
     /**
      * Display a listing of the resource.
      *
@@ -18,9 +23,11 @@ class ProdukController extends Controller
         $data = Produk::all();
         $data->map(function($data){
             $data['kabupaten_id'] = $data->getKabupatenById;
+            $jenisProdukTampil = array_search($data->jenis_produk, $this->jenisProduk);
+            $data['jenis_produk'] = $jenisProdukTampil;
             unset($data->getKabupatenById);
+            // echo json_encode($jenisProdukTampil);
         });
-        // echo json_encode($data);
         return view('produk-data', ['data'=> $data]);
     }
 
@@ -31,7 +38,19 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        $data = Kabupaten::all();
+        $value = (object) array(
+            'no_perda'=>'',
+            'judul_peraturan'=>'',
+            'tahun'=>'',
+            'kabupaten_id'=>'',
+            'jenis_produk'=>'',
+            'status'=>'',
+        );
+        $data['jenis_produk'] = $this->jenisProduk;
+        $data['dataProduk'] = $value;
+        $data['dataKabupaten'] = Kabupaten::all();
+        $data['dataAction'] = 'produk.store';
+        $data['dataStatus'] = 'Tambah';
         return view('produk-form', ['data'=> $data]);
     }
 
@@ -86,9 +105,18 @@ class ProdukController extends Controller
      * @param  \App\Models\Produk  $Produk
      * @return \Illuminate\Http\Response
      */
-    public function edit(Produk $Produk)
+    public function edit($id)
     {
         //
+        $value = Produk::findOrFail($id);
+        $data['jenis_produk'] = $this->jenisProduk;
+        $data['dataProduk'] = $value;
+        $data['dataKabupaten'] = Kabupaten::all();
+        $data['dataAction'] = 'produk.update';
+        $data['dataStatus'] = 'Edit';
+        // echo array_search($value->jenis_produk, $this->jenisProduk);
+        return view('produk-form', ['data'=> $data]);
+
     }
 
     /**
@@ -98,9 +126,35 @@ class ProdukController extends Controller
      * @param  \App\Models\Produk  $Produk
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Produk $Produk)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'no_perda'=>'required',
+            'judul_peraturan'=>'required',
+            'tahun'=>'required',
+            'kabupaten_id'=>'required',
+            'jenis_produk'=>'required',
+            'status'=>'required',
+			'file_produk' => 'file|mimes:pdf|max:2048'
+		]);
+        unset($request['_token']);
+        unset($request['_method']);
+        $file = $request->file('file_produk');
+        $data = $request->all();
+        if(!empty($file)){
+            // menyimpan data file yang diupload ke variabel $file
+    
+            $nama_file = time()."_".$file->getClientOriginalName();
+    
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'file-upload';
+            $request->file_Produk = $nama_file;
+            $file->move($tujuan_upload,$nama_file);
+            $data['file_produk'] = $nama_file;
+        }
+        Produk::whereId($id)->update($data);
+        return redirect()->route('produk')->with('message', \GeneralHelper::formatMessage('Berhasil Ubah data !', 'success'));
+
     }
 
     

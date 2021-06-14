@@ -14,19 +14,23 @@
 
 @section('content')
 <div class="title_left">
-    <h3>Tambah Produk</h3>
+    <h3>{{$data['dataStatus']}} Produk Hukum</h3>
 </div>
 <br />
 
-<form action="{{route('produk.store')}}" method="POST" enctype="multipart/form-data" id="demo-form2"
+<form @if ($data['dataStatus']=='Tambah' ) action="{{route($data['dataAction'])}}" @else
+    action="{{route($data['dataAction'], $data['dataProduk']->id)}}" @endif method="POST" enctype="multipart/form-data" id="demo-form2"
     data-parsley-validate class="form-horizontal form-label-left">
     {{ csrf_field() }}
+    @if ($data['dataStatus']=='Edit' )
+    <input type="hidden" name="_method" value="PUT">
+    @endif
     <div class="item form-group">
         <label class="col-form-label col-md-2 col-sm-2 label-align" for="no_perda">No.
             Perda <span class="required">*</span>
         </label>
         <div class="col-md-10 col-sm-10 ">
-            <input type="text" name="no_perda" id="no_perda" required="required" class="form-control ">
+            <input type="text" name="no_perda" id="no_perda" required="required" class="form-control" value="{{$data['dataProduk']->no_perda}}">
         </div>
     </div>
     <div class="item form-group">
@@ -34,7 +38,7 @@
                 class="required">*</span>
         </label>
         <div class="col-md-10 col-sm-10 ">
-            <input type="text" name="judul_peraturan" id="judul_peraturan" required="required" class="form-control ">
+            <input type="text" name="judul_peraturan" id="judul_peraturan" required="required" class="form-control" value="{{$data['dataProduk']->judul_peraturan}}">
         </div>
     </div>
     <div class="item form-group">
@@ -42,7 +46,7 @@
             <span class="required">*</span>
         </label>
         <div class="col-md-10 col-sm-10 ">
-            <input type="text" name="tahun" id="tahun" required="required" class="form-control ">
+            <input type="text" name="tahun" id="tahun" required="required" class="form-control" value="{{$data['dataProduk']->tahun}}">
         </div>
     </div>
     <div class="item form-group">
@@ -50,10 +54,10 @@
             <span class="required">*</span>
         </label>
         <div class="col-md-10 col-sm-10 ">
-            <select name="kabupaten_id" id="kabupaten_id" class="form-control">
-                <option>Pilih Kabupaten</option>
-                @foreach ($data as $key=>$item)
-                <option value="{{$item->id}}">{{$item->kabupaten_kode}} -
+            <select name="kabupaten_id" id="kabupaten_id" class="form-control" required>
+                <option value="">Pilih Kabupaten</option>
+                @foreach ($data['dataKabupaten'] as $key=>$item)
+                <option value="{{$item->id}}" {{ ($item->id == $data['dataProduk']->kabupaten_id)? 'selected': '' }}>{{$item->kabupaten_kode}} -
                     {{$item->kabupaten_nama}}
                 </option>
                 @endforeach
@@ -65,7 +69,12 @@
                 class="required">*</span>
         </label>
         <div class="col-md-10 col-sm-10 ">
-            <input type="text" name="jenis_produk" id="jenis_produk" required="required" class="form-control ">
+            <select name="jenis_produk" id="jenis_produk" class="form-control" required>
+                <option value="">Pilih Jenis Produk</option>
+                @foreach ($data['jenis_produk'] as $key=>$item)
+                <option value="{{$item}}" {{ ($item == $data['dataProduk']->jenis_produk)? 'selected': '' }}>{{$key}}</option>
+                @endforeach
+            </select>
         </div>
     </div>
     <div class="item form-group">
@@ -73,9 +82,10 @@
             <span class="required">*</span>
         </label>
         <div class="col-md-10 col-sm-10 ">
-            <select name="status" id="status" class="form-control">
-                <option value="berlaku">Berlaku</option>
-                <option value="dicabut">Dicabut</option>
+            <select name="status" id="status" class="form-control" required>
+                <option value="">Pilih Status</option>
+                <option value="berlaku" {{ ($data['dataProduk']->status == "berlaku")? 'selected': '' }}>Berlaku</option>
+                <option value="dicabut" {{ ($data['dataProduk']->status == "dicabut")? 'selected': '' }}>Dicabut</option>
             </select>
         </div>
     </div>
@@ -84,13 +94,13 @@
             Produk (.pdf) <span class="required">*</span>
         </label>
         <div class="col-md-10 col-sm-10 ">
-            <input type="file" name="file_produk" id="file_produk" required="required" class="form-control ">
+            <input type="file" name="file_produk" id="file_produk" class="form-control" {{ ($data['dataStatus'] == 'Tambah')? 'required': '' }}>
         </div>
     </div>
     <div class="ln_solid"></div>
     <div class="item form-group">
         <div class="col-md-12 col-sm-12 offset-md-2">
-            <input type="submit" class="btn btn-success" value="Simpan">
+            <input type="submit" class="btn btn-success" value="{{$data['dataStatus']}}">
         </div>
     </div>
 </form>

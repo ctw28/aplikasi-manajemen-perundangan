@@ -6,7 +6,7 @@
             <li><a href="{{route('dashboard')}}"><i class="fa fa-home"></i> Dashboard </a></li>
             <li><a href="{{route('rancangan')}}"><i class="fa fa-edit"></i> Rancangan Produk Hukum </a></li>
             <li><a href="{{route('produk')}}"><i class="fa fa-desktop"></i> Produk Hukum</a></li>
-            <li><a><i class="fa fa-bar-chart-o"></i> Laporan Produk Hukum</a></li>
+            <li><a href="{{route('laporan')}}"><i class="fa fa-bar-chart-o"></i> Laporan Produk Hukum</a></li>
             <li><a><i class="fa fa-clone"></i>Backup </a></li>
             <li><a><i class="fa fa-sign-out"></i>Logout </a></li>
         </ul>

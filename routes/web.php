@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RancanganController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\LaporanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +32,9 @@ Route::group(['prefix'=>'produk-hukum'],function(){
     Route::get('/', [ProdukController::class, 'index'])->name('produk');
     Route::get('/tambah-data', [ProdukController::class, 'create'])->name('produk.create');
     Route::post('/simpan', [ProdukController::class, 'store'])->name('produk.store');
+    Route::get('/{id}/edit-data', [ProdukController::class, 'edit'])->name('produk.edit');
+    Route::put('/{id}', [ProdukController::class, 'update'])->name('produk.update');
     Route::get('/{id}/hapus',[ProdukController::class, 'destroy'])->name('produk.destroy');
 });
 
-// Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/laporan-produk-hukum', [LaporanController::class, 'index'])->name('laporan');

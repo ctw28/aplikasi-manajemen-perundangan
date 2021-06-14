@@ -50,6 +50,10 @@
                 </a>
             </td>
             <td>
+                <a href="{{route('produk.edit',['id' => $item->id])}}" class="btn btn-warning btn-xs">
+                    <i class="fa fa-pencil"></i>
+                </a>
+
                 <a onclick="return confirm('Yakin hapus data?')" href="{{route('produk.destroy',['id' => $item->id])}}"
                     class="btn btn-danger btn-xs">
                     <i class="fa fa-trash-o"></i>

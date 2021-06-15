@@ -61,18 +61,28 @@
         </div>
 
         <div class="x_content">
-            <button id="cetak_laporan" class="btn btn-info"><i class="fa fa-print"></i> &nbsp Cetak Laporan</button>
-            <div class="table-responsive">
-                <table class="table table-striped jambo_table bulk_action">
+            <button id="cetak_laporan" onclick="cetak()" class="btn btn-info"><i class="fa fa-print"></i> &nbsp Cetak
+                Laporan</button>
+            <div id="data_laporan" style="color:#000">
+                <h4 style="text-align:center">Daftar Produk Hukum</h4>
+                <div>
+                    <p>
+                        Kabupaten : <span id="kab"></span>
+                        <br>Produk Hukum : <span id="produk"></span>
+                        <br>Kata Kunci : <span id="cari"></span>
+                    </p>
+                </div>
+                <table class="table table-striped jambo_table">
+
                     <thead>
-                        <tr class="headings">
-                            <th class="column-title">No </th>
-                            <th class="column-title">No. Peraturan</th>
-                            <th class="column-title">Judul Peraturan </th>
-                            <th class="column-title">Tahun </th>
-                            <th class="column-title">Kabupaten / kota </th>
-                            <th class="column-title">Produk Hukum </th>
-                            <th class="column-title">Status</th>
+                        <tr>
+                            <th>No </th>
+                            <th>No. Peraturan</th>
+                            <th>Judul Peraturan </th>
+                            <th>Tahun </th>
+                            <th>Kabupaten / kota </th>
+                            <th>Produk Hukum </th>
+                            <th>Status</th>
                         </tr>
                     </thead>
 
@@ -87,28 +97,82 @@
 @endsection
 
 @section('js')
+<script src="{{asset('build/html2pdf.min.js')}}"></script>
+
 <script>
 const base_url = "{{url('/')}}";
 
+function cetak() {
+    // Choose the element that our invoice is rendered in.
+    const element = document.getElementById("data_laporan");
+    var opt = {
+        margin: 0.5,
+        filename: 'myfile.pdf',
+        image: {
+            type: 'png',
+            quality: 1
+        },
+        html2canvas: {
+            scale: 1
+        },
+        jsPDF: {
+            unit: 'in',
+            format: 'letter',
+            orientation: 'portrait'
+        }
+    };
+    // Choose the element and save the PDF for our user.
+    html2pdf()
+        .set(opt)
+        .set({
+            pagebreak: {
+                mode: ['avoid-all', 'css', 'legacy']
+            }
+        })
+        .from(element)
+        .save();
+}
 async function lihat_laporan(value) {
     let dataSend = new FormData()
-    dataSend.append('kabupaten_id', document.getElementById("kabupaten_id").value)
-    dataSend.append('jenis_produk', document.getElementById("jenis_produk").value)
-    if (document.getElementById("judul_peraturan").value != "")
-        dataSend.append('judul_peraturan', document.getElementById("judul_peraturan").value)
+    let tableRow = document.getElementById("showData");
+    let infoKab = document.getElementById("kab");
+    let infoProduk = document.getElementById("produk");
+    let infoCari = document.getElementById("cari");
+    let selectKab = document.getElementById("kabupaten_id");
+    let selectProduk = document.getElementById("jenis_produk");
+    let selectJudul = document.getElementById("judul_peraturan");
+    if (selectKab.value == "") {
+        alert('Pilih Kabupaten')
+        return
+    }
+    if (selectProduk.value == "") {
+        alert('Pilih Produk Hukum')
+        return
+    }
+    dataSend.append('kabupaten_id', selectKab.value)
+    dataSend.append('jenis_produk', selectProduk.value)
+    infoKab.innerHTML = selectKab.options[selectKab.selectedIndex].text;
+    infoProduk.innerHTML = selectProduk.options[selectProduk.selectedIndex].text;
 
+    if (selectJudul.value != "") {
+        dataSend.append('judul_peraturan', selectJudul.value)
+        infoCari.innerHTML = selectJudul.value;
+    } else {
+        infoCari.innerHTML = "-";
+    }
     let response = await fetch("{{route('produk.show')}}", {
         method: "POST",
         body: dataSend
     });
     let responseMessage = await response.json()
-    // console.log(responseMessage.data)
-    let tableRow = document.getElementById("showData");
+
+
     tableRow.innerHTML = "";
     if (responseMessage.data.length !== 0) {
-        responseMessage.data.forEach(row => {
+        responseMessage.data.forEach(function callback(row, index) {
+            let no = index + 1;
             tableRow.insertRow().innerHTML = '<tr>' +
-                '<td>1</td>' +
+                '<td>' + no + '</td>' +
                 '<td>' + row.no_perda + '</td>' +
                 '<td>' + row.judul_peraturan + '</td>' +
                 '<td>' + row.tahun + '</td>' +

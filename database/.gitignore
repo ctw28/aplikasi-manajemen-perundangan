@@ -1,2 +1,2 @@
 *.sqlite*
-/public/file-upload
+/public/file-upload/*

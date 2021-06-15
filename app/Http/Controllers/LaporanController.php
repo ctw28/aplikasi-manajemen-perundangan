@@ -44,10 +44,18 @@ class LaporanController extends Controller
         );
         if(!empty($request->judul_peraturan)){
             $results = Produk::where($where)->where('judul_peraturan','LIKE',"%{$request->judul_peraturan}%")->get();
+            
         }
         else{
             $results = Produk::where($where)->get();
         }
+        $results->map(function($results){
+            $results['kabupaten_id'] = $results->getKabupatenById;
+            $jenisProdukTampil = array_search($results->jenis_produk, $this->jenisProduk);
+            $results['jenis_produk'] = $jenisProdukTampil;
+            unset($results->getKabupatenById);
+            // echo json_encode($jenisProdukTampil);
+        });
         return response()->json(['data'=>$results]);
     }
 

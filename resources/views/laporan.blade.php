@@ -15,7 +15,7 @@
 @section('content')
 <div class="well" style="overflow: auto">
     <div class="col-md-3">
-        Pilih Jenis Produk
+        Pilih Kabupaten
         <select name="kabupaten_id" id="kabupaten_id" class="form-control" required>
             <option value="">Pilih Kabupaten</option>
             @foreach ($data['dataKabupaten'] as $key=>$item)
@@ -43,11 +43,9 @@
             placeholder="masukkan kata kunci judul (optional)">
     </div>
 
-    <div class="col-md-12">
-        <div class="row">
-            <button id="lihat_laporan" onclick="lihat_laporan()" class="btn btn-success"><i class="fa fa-search"></i>
-                &nbsp Lihat Laporan</button>
-        </div>
+    <div class="col-md-12" style="margin-top: 10px">
+        <button id="lihat_laporan" onclick="lihat_laporan()" class="btn btn-success"><i class="fa fa-search"></i>
+            &nbsp Lihat Laporan</button>
     </div>
 
 </div>
@@ -79,7 +77,7 @@
                     </thead>
 
                     <tbody id="showData">
-                        
+
                     </tbody>
                 </table>
             </div>
@@ -96,37 +94,33 @@ async function lihat_laporan(value) {
     let dataSend = new FormData()
     dataSend.append('kabupaten_id', document.getElementById("kabupaten_id").value)
     dataSend.append('jenis_produk', document.getElementById("jenis_produk").value)
-    if(document.getElementById("judul_peraturan").value!="")
-    dataSend.append('judul_peraturan', document.getElementById("judul_peraturan").value)
+    if (document.getElementById("judul_peraturan").value != "")
+        dataSend.append('judul_peraturan', document.getElementById("judul_peraturan").value)
 
     let response = await fetch("{{route('produk.show')}}", {
-        method :"POST",
+        method: "POST",
         body: dataSend
     });
     let responseMessage = await response.json()
     // console.log(responseMessage.data)
     let tableRow = document.getElementById("showData");
-    responseMessage.data.forEach(row => {
-        console.log(row.id);
-        // tableRow.append('<tr>');
-        // tableRow.append('<td>1</td>');
-        // tableRow.append('<td>'+row.no_perda+'</td>');
-        // tableRow.append('<td>'+row.judul_peraturan+'</td>');
-        // tableRow.append('<td>'+row.tahun+'</td>');
-        // tableRow.append('<td>'+row.kabupaten_id+'</td>');
-        // tableRow.append('<td>'+row.jenis_produk+'</td>');
-        // tableRow.append('<td>'+row.status+'</td>');
-        // tableRow.append('</tr>');
-        tableRow.insertRow().innerHTML = '<tr>'+
-        '<td>1</td>'+
-        '<td>'+row.no_perda+'</td>'+
-        '<td>'+row.judul_peraturan+'</td>'+
-        '<td>'+row.tahun+'</td>'+
-        '<td>'+row.kabupaten_id+'</td>'+
-        '<td>'+row.jenis_produk+'</td>'+
-        '<td>'+row.status+'</td>'+
-        '</tr>';
-    });
+    tableRow.innerHTML = "";
+    if (responseMessage.data.length !== 0) {
+        responseMessage.data.forEach(row => {
+            tableRow.insertRow().innerHTML = '<tr>' +
+                '<td>1</td>' +
+                '<td>' + row.no_perda + '</td>' +
+                '<td>' + row.judul_peraturan + '</td>' +
+                '<td>' + row.tahun + '</td>' +
+                '<td>' + row.kabupaten_id.kabupaten_nama + '</td>' +
+                '<td>' + row.jenis_produk + '</td>' +
+                '<td>' + row.status + '</td>' +
+                '</tr>';
+        });
+    } else {
+        tableRow.insertRow().innerHTML = '<tr>' +
+            '<td colspan="7" style="text-align:center">Maaf, Data tidak ditemukan!</td></tr>';
+    }
     document.getElementById("laporan_table").style.display = "block"
 
 }

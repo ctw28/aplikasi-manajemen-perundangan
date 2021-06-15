@@ -37,7 +37,7 @@
         </select>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-5">
         Kata kunci judul
         <input type="text" name="judul_peraturan" id="judul_peraturan" class="form-control"
             placeholder="masukkan kata kunci judul (optional)">

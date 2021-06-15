@@ -17,13 +17,13 @@
     <thead>
         <tr style="text-align:center">
             <th>No</th>
-            <th>No. Registasi</th>
+            <th>No. Surat</th>
             <th>Tanggal Penerimaan</th>
             <th>Tanggal Surat</th>
-            <th>No. Surat</th>
             <th>Kabupaten</th>
             <th>Perihal</th>
             <th>Keterangan</th>
+            <th>No. Registasi</th>
             <th>Status</th>
             <th>File</th>
             <th>Aksi</th>
@@ -35,13 +35,13 @@
         @foreach ($data as $key=>$item)
         <tr>
             <td>1</td>
-            <td>{{$item->no_registrasi}}</td>
+            <td>{{$item->no_surat}}</td>
             <td>{{$item->tgl_penerimaan}}</td>
             <td>{{$item->tgl_surat}}</td>
-            <td>{{$item->no_surat}}</td>
             <td>{{$item->kabupaten_id->kabupaten_nama}}</td>
             <td>{{$item->perihal}}</td>
             <td>{{$item->keterangan}}</td>
+            <td>{{$item->no_registrasi}}</td>
             <td>
                 <h6>
                     <span class="badge {{($item->status=='selesai')?'badge-success':'badge-info'}}">

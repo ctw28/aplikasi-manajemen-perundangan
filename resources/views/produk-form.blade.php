@@ -52,12 +52,12 @@
         </div>
     </div>
     <div class="item form-group">
-        <label class="col-form-label col-md-2 col-sm-2 label-align" for="kabupaten">Kabupaten
+        <label class="col-form-label col-md-2 col-sm-2 label-align" for="kabupaten">Kabupaten / Kota
             <span class="required">*</span>
         </label>
         <div class="col-md-10 col-sm-10 ">
             <select name="kabupaten_id" id="kabupaten_id" class="form-control" required>
-                <option value="">Pilih Kabupaten</option>
+                <option value="">Pilih Kabupaten / Kota</option>
                 @foreach ($data['dataKabupaten'] as $key=>$item)
                 <option value="{{$item->id}}" {{ ($item->id == $data['dataProduk']->kabupaten_id)? 'selected': '' }}>
                     {{$item->kabupaten_kode}} -
@@ -68,12 +68,12 @@
         </div>
     </div>
     <div class="item form-group">
-        <label class="col-form-label col-md-2 col-sm-2 label-align" for="jenis_produk">Jenis Produk <span
+        <label class="col-form-label col-md-2 col-sm-2 label-align" for="jenis_produk">Produk Hukum <span
                 class="required">*</span>
         </label>
         <div class="col-md-10 col-sm-10 ">
             <select name="jenis_produk" id="jenis_produk" class="form-control" required>
-                <option value="">Pilih Jenis Produk</option>
+                <option value="">Pilih Produk Hukum</option>
                 @foreach ($data['jenis_produk'] as $key=>$item)
                 <option value="{{$item}}" {{ ($item == $data['dataProduk']->jenis_produk)? 'selected': '' }}>{{$key}}
                 </option>

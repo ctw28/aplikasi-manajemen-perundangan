@@ -15,9 +15,9 @@
 @section('content')
 <div class="well" style="overflow: auto">
     <div class="col-md-3">
-        Pilih Kabupaten
+        Pilih Kabupaten / Kota
         <select name="kabupaten_id" id="kabupaten_id" class="form-control" required>
-            <option value="">Pilih Kabupaten</option>
+            <option value="">Pilih Kabupaten / Kota</option>
             @foreach ($data['dataKabupaten'] as $key=>$item)
             <option value="{{$item->id}}">
                 {{$item->kabupaten_kode}} -
@@ -28,9 +28,9 @@
     </div>
 
     <div class="col-md-3">
-        Pilih Jenis Produk
+        Pilih Produk Hukum
         <select name="jenis_produk" id="jenis_produk" class="form-control" required>
-            <option value="">Pilih Jenis Produk</option>
+            <option value="">Pilih Produk Hukum</option>
             @foreach ($data['jenis_produk'] as $key=>$item)
             <option value="{{$item}}">{{$key}}</option>
             @endforeach
@@ -67,11 +67,11 @@
                     <thead>
                         <tr class="headings">
                             <th class="column-title">No </th>
-                            <th class="column-title">No. Perda</th>
+                            <th class="column-title">No. Peraturan</th>
                             <th class="column-title">Judul Peraturan </th>
                             <th class="column-title">Tahun </th>
-                            <th class="column-title">Kabupaten </th>
-                            <th class="column-title">Jenis Produk </th>
+                            <th class="column-title">Kabupaten / kota </th>
+                            <th class="column-title">Produk Hukum </th>
                             <th class="column-title">Status</th>
                         </tr>
                     </thead>

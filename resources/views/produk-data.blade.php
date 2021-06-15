@@ -16,11 +16,11 @@
     <thead>
         <tr>
             <th>No</th>
-            <th>No. Perda</th>
+            <th>No. Peraturan</th>
             <th>Judul Peraturan</th>
             <th>Tahun</th>
-            <th>Kabupaten</th>
-            <th>Jenis Produk</th>
+            <th>Kabupaten / Kota</th>
+            <th>Produk Hukum</th>
             <th>Status</th>
             <th>File</th>
             <th>Aksi</th>

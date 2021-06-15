@@ -62,12 +62,12 @@
         </div>
     </div>
     <div class="item form-group">
-        <label class="col-form-label col-md-2 col-sm-2 label-align" for="kabupaten">Kabupaten
+        <label class="col-form-label col-md-2 col-sm-2 label-align" for="kabupaten">Kabupaten / Kota
             <span class="required">*</span>
         </label>
         <div class="col-md-10 col-sm-10 ">
             <select name="kabupaten_id" id="kabupaten_id" class="form-control" required>
-                <option>Pilih Kabupaten</option>
+                <option>Pilih Kabupaten / Kota</option>
                 @foreach ($data['dataKabupaten'] as $key=>$item)
                 <option value="{{$item->id}}" {{ ($item->id == $data['dataRancangan']->kabupaten_id)? 'selected': '' }}>
                     {{$item->kabupaten_kode}} - {{$item->kabupaten_nama}}

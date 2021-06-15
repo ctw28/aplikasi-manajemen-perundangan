@@ -20,7 +20,7 @@
             <th>No. Surat</th>
             <th>Tanggal Penerimaan</th>
             <th>Tanggal Surat</th>
-            <th>Kabupaten</th>
+            <th>Kabupaten / Kota</th>
             <th>Perihal</th>
             <th>Keterangan</th>
             <th>No. Registasi</th>

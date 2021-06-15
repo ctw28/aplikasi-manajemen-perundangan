@@ -19,7 +19,7 @@ class CreateProduksTable extends Migration
             $table->string('judul_peraturan');
             $table->string('tahun');
             $table->unsignedBigInteger('kabupaten_id');
-            $table->enum('jenis_produk', ['daerah', 'gubernur']);
+            $table->enum('jenis_produk', ['daerah', 'bupati', 'walikota']);
             $table->enum('status', ['berlaku', 'dicabut']);
             $table->string('file_produk');
             $table->timestamps();

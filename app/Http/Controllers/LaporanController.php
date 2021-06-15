@@ -10,7 +10,8 @@ class LaporanController extends Controller
 {
     private $jenisProduk = array(
         'Peraturan Daerah' => 'daerah',
-        'Peraturan Gubernur / Walikota' => 'gubernur'
+        'Peraturan Bupati' => 'bupati',
+        'Peraturan Walikota' => 'walikota'
     );
     /**
      * Display a listing of the resource.
